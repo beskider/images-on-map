@@ -2,7 +2,7 @@
 
 # Images on the Map
 
-The application loads photos and based on the Exif data presents them on the map.
+The React application loads photos and based on the Exif data presents them on the map.
 
 ## Technologies
 
@@ -22,7 +22,7 @@ The application loads photos and based on the Exif data presents them on the map
 
 # Zdjęcia na mapie
 
-Aplikacja umożliwia ładowanie zdjęć i na podstawie informacji Exif prezentuje je na mapie.
+Oparta na bibliotece React aplikacja umożliwiająca ładowanie zdjęć i na podstawie informacji Exif prezentowanie ich na mapie.
 
 ## Użyte technologie
 
