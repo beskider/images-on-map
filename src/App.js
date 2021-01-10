@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import EXIF from 'exif-js';
-
 import './App.css';
+
+import EXIF from 'exif-js';
 
 import Map from './components/Map/Map';
 import Buttons from './components/Buttons/Buttons';
@@ -19,15 +19,16 @@ function App() {
   const registerImages = (files) => {
 
     Array.from(files).forEach(file => {
+      
       EXIF.getData(file, function() {
-        var exifData = EXIF.pretty(this);
-        if(exifData) {         
+        const exifData = EXIF.pretty(this);
+        if (exifData) {         
           const gpsLatitudeRef = EXIF.getTag(this, "GPSLatitudeRef");
           const gpsLatitude = EXIF.getTag(this, "GPSLatitude");
           const gpsLongitudeRef = EXIF.getTag(this, "GPSLongitudeRef");
           const gpsLongitude = EXIF.getTag(this, "GPSLongitude");          
           if ( gpsLatitudeRef !== undefined && gpsLatitude !== undefined && gpsLongitudeRef !== undefined && gpsLongitude !== undefined ) {
-            console.log(`Plik ${file.name}, posiada dane GPS: ${gpsLatitudeRef}${gpsLatitude} ${gpsLongitudeRef}${gpsLongitude}`);
+            console.log(`Plik ${file.name} posiada dane GPS: ${gpsLatitudeRef}${gpsLatitude} ${gpsLongitudeRef}${gpsLongitude}`);
             setImages(prevImages => [...prevImages, file]);
           }
           else {

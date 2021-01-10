@@ -1,3 +1,5 @@
+![Zdjęcie](./images/map.jpg)
+
 # Images on the Map
 
 The application loads photos and based on the Exif data presents them on the map.

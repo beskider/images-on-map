@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import EXIF from 'exif-js';
 
-import "./Map.css";
-import "../utils";
-
+import './Map.css';
 
 const Map = ({items}) => {
   
@@ -15,43 +13,56 @@ const Map = ({items}) => {
     minZoom: 3,
     maxZoom: 18   
   }     
-
+  
   const convertDMSToDD = (parts) => {
     let dd = parseInt(parts[1]) + parseInt(parts[2])/60 + parseFloat(parts[3])/3600;
-     if (parts[0] === "S" || parts[0] === "W") {
+    if (parts[0] === "S" || parts[0] === "W") {
       dd *= -1 
     }        
     return dd;
   }
 
   const getPosition = (file) => {
-
-    const position = getGPSfromFile(file);
-
-    let latitude = convertDMSToDD( [ position.gpsLatitudeRef, ...position.gpsLatitude ] );
-    let longitude = convertDMSToDD( [ position.gpsLongitudeRef, ...position.gpsLongitude ] );
-
+      let latitude, longitude;
+      EXIF.getData(file, function() {
+        const gpsLatitudeRef = EXIF.getTag(this, "GPSLatitudeRef");
+        const gpsLatitude = EXIF.getTag(this, "GPSLatitude");
+        const gpsLongitudeRef = EXIF.getTag(this, "GPSLongitudeRef");
+        const gpsLongitude = EXIF.getTag(this, "GPSLongitude");                  
+        latitude = convertDMSToDD( [ gpsLatitudeRef, ...gpsLatitude ] );
+        longitude = convertDMSToDD( [ gpsLongitudeRef, ...gpsLongitude ] );
+      });
     return ([ latitude, longitude ]);
-
   }
 
   const markers = items.map((item, index) => {      
+    const position = getPosition(item);
     return (
-      <Marker key={index} position={getPosition(item)}>
+      <Marker key={index} position={position}>
         <Popup>
-        <h4>{item.name}</h4>
-        <p>{getPosition(item)}</p>
-        <img src={URL.createObjectURL(item)} alt={item.name} className="img-preview"></img>
+          <h4>{item.name}</h4>
+          <p>{`${position[0]} ${position[1]}`}</p>
+          <img src={URL.createObjectURL(item)} alt={item.name} className="img-preview"></img>
         </Popup>
       </Marker>
     )
   });
 
   function MapFlyingEl() {
+    const fitZoomMargin = 1.0005;
     const map = useMap();    
-    if (items.length!==0) {
-      const position = getPosition(items[0]);
-      map.flyTo(position, 14, {
+    if (items.length > 0) {
+      let itemsPositions = [];
+      items.forEach( item => {
+        itemsPositions.push(getPosition(item));
+      })
+      const itemsLatitudes = itemsPositions.map( el => el[0] )
+      const itemsLongitudes = itemsPositions.map( el => el[1] )
+      const minLat = Math.min(...itemsLatitudes);
+      const maxLat = Math.max(...itemsLatitudes);
+      const minLng = Math.min(...itemsLongitudes);
+      const maxLng = Math.max(...itemsLongitudes);
+      map.flyToBounds([ [minLat/fitZoomMargin, minLng/fitZoomMargin], [maxLat*fitZoomMargin, maxLng*fitZoomMargin] ], {
         duration: 2
       });
     }
