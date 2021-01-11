@@ -2,13 +2,13 @@ import React from 'react'
 
 import './Items.css';
 
-const Items = ({items}) => {
+const Items = ({ items }) => {
     return (
         <div>
             <h5>
-                { items.length === 0  ? '- brak obrazów -' : 'Lista obrazów' }
+                { items.length > 0 ? 'Lista obrazów' : '- brak obrazów -' }
             </h5>
-            { items.length !== 0 && 
+            { items.length > 0 && 
                 <table className="table table-hover table-sm">
                     <thead>
                         <tr>

@@ -5,7 +5,7 @@ import EXIF from 'exif-js';
 
 import './Map.css';
 
-const Map = ({items}) => {
+const Map = ({ items }) => {
   
   const mapInitValues = {
     position: [ 50.062260, 19.937065],    

@@ -5,7 +5,7 @@ import { faFileImage, faImages } from '@fortawesome/free-solid-svg-icons';
 
 import './Buttons.css';
 
-const Buttons = (props) => {
+const Buttons = ( props ) => {
     return (
         <>
             <div className="buttons">
