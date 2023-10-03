@@ -1,0 +1,21 @@
+* {
+  margin: 0px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.button:hover {
+  filter: drop-shadow(4px 4px 4px #999);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  visibility: hidden;
+  position: absolute;
+}
