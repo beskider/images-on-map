@@ -5,6 +5,8 @@
 
 The React application loads photos and based on the Exif data presents them on the map.
 
+You can try at https://beskider.github.io/images-on-map/
+
 ## Technologies
 
 * [React](https://pl.reactjs.org/)
@@ -24,6 +26,8 @@ The React application loads photos and based on the Exif data presents them on t
 # Zdjęcia na mapie
 
 Oparta na bibliotece React aplikacja umożliwiająca ładowanie zdjęć i na podstawie informacji Exif prezentowanie ich na mapie.
+
+Działająca aplikacja pod adresem https://beskider.github.io/images-on-map/
 
 ## Użyte technologie
 
