@@ -2,6 +2,7 @@
   "name": "images-on-map",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://beskider.github.io/images-on-map",
   "dependencies": {
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/leaflet": "^1.9.6"
+    "@types/leaflet": "^1.9.6",
+    "gh-pages": "^6.0.0"
   }
 }
